@@ -36,8 +36,8 @@ version: 1
 # Variables available for presets.
 variables:
     default:
-        XCODEBUILD_SCHEME: NetguruTemplateApp
-        XCODEBUILD_PROJECT: ./NetguruTemplateApp.xcworkspace
+        XCODEBUILD_SCHEME: CompanySystem-iOS
+        XCODEBUILD_PROJECT: ./CompanySystem-iOS.xcworkspace
         XCODEBUILD_CONFIGURATION: Debug
         APPCENTER_ORG_NAME: office-4dmm
         APPCENTER_DISTRIBUTION_GROUP: $(ENV:APP_CENTER_DISTRIBUTION_GROUP)

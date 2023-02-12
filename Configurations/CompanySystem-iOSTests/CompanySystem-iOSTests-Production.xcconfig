@@ -1,0 +1,2 @@
+#include "CompanySystem-iOSTests-Base.xcconfig"
+#include "../../Pods/Target Support Files/Pods-CompanySystem-iOSTests/Pods-CompanySystem-iOSTests.production.xcconfig"

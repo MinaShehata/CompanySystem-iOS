@@ -26,8 +26,8 @@ warn "Please provide a summary in the Pull Request description" if github.pr_bod
 
 # Generate report
 report = xcov.produce_report(
-  scheme: "NetguruTemplateApp",
-  workspace: "NetguruTemplateApp.xcworkspace",
+  scheme: "CompanySystem-iOS",
+  workspace: "CompanySystem-iOS.xcworkspace",
   skip_slack: true,
   only_project_targets: true,
 )

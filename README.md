@@ -1,11 +1,3 @@
-# !! Template Repository !!
-This is template repository for iOS projects. To setup new project create new Github repository using this one as template.
-Fetch it to your local machine, open terminal and go the directory where your project is fetched.
-Run:
-```bash
-swift setupProject.swift
-```
-Follow the steps in the console.
 <!-- Readme
     Couple of points about editing:
 
@@ -30,7 +22,7 @@ Follow the steps in the console.
 [iOSAppsSetupGuide]: https://netguru.atlassian.net/wiki/spaces/IOS/pages/9208158/Technical+Setup+Checklist
 
 <!-- Put your project's name -->
-# NetguruTemplateApp
+# CompanySystem-iOS
 
 <!-- Add links to CD places like App Center, Firebase Distribution or other  -->
 <!-- Add links to CI configs with build status and deployment environment -->
@@ -41,7 +33,7 @@ Follow the steps in the console.
 | staging (develop)     | [${CD}][cdLink1] link | CI status tag |
 | production (master)   | [${CD}][cdLink2] link | CI status tag |
 
-Welcome to the **NetguruTemplateApp** project.
+Welcome to the **CompanySystem-iOS** project.
 ${PROJECT_DESCRIPTION}
 
 - [JIRA][jiraBoardLink]

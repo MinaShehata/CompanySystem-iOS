@@ -1,5 +1,0 @@
-#include "NetguruTemplateApp-Base.xcconfig"
-#include "../../Pods/Target Support Files/Pods-NetguruTemplateApp/Pods-NetguruTemplateApp.debug.xcconfig"
-
-_CODESIGN_IDENTITY = Apple Development
-_CODESIGN_PROFILE_SPECIFIER = NetguruTemplateApp Development

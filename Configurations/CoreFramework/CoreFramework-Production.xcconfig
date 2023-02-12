@@ -1,2 +1,0 @@
-#include "CoreFramework-Base.xcconfig"
-#include "../../Pods/Target Support Files/Pods-CoreFramework/Pods-CoreFramework.production.xcconfig"

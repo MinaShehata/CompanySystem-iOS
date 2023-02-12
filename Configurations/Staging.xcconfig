@@ -1,4 +1,4 @@
 #include "Base.xcconfig"
 #include "../Carthage/Checkouts/xcconfigs/Configurations/Release.xcconfig"
 
-_BUNDLE_IDENTIFIER = com.netguru.xcodegenDemo.staging
+_BUNDLE_IDENTIFIER = com.imina.companySystemiOS.staging

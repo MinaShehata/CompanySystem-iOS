@@ -1,0 +1,5 @@
+#include "CompanySystem-iOS-Base.xcconfig"
+#include "../../Pods/Target Support Files/Pods-CompanySystem-iOS/Pods-CompanySystem-iOS.staging.xcconfig"
+
+_CODESIGN_IDENTITY = iPhone Distribution
+_CODESIGN_PROFILE_SPECIFIER = CompanySystem-iOS Staging

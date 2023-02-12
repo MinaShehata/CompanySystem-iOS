@@ -1,2 +1,0 @@
-#include "NetguruTemplateApp-Base.xcconfig"
-#include "../../Pods/Target Support Files/Pods-NetguruTemplateApp/Pods-NetguruTemplateApp.production.xcconfig"

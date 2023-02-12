@@ -1,41 +1,26 @@
-name: NetguruTemplateApp
+name: CompanySystem-iOS
 include:
   - xcodegen_ng_templates.yml
 
 targets:
-  NetguruTemplateApp:
+  CompanySystem-iOS:
     templates:
       - application
     sources:
       - App
-    dependencies:
-      - target: CoreFramework
     scheme:
       testTargets:
-        - NetguruTemplateAppTests
+        - CompanySystem-iOSTests
     info:
       properties:
         UILaunchStoryboardName: LaunchView
 
-  NetguruTemplateAppTests:
+  CompanySystem-iOSTests:
     templates:
       - test
     sources:
       - AppTests
     dependencies:
-      - target: NetguruTemplateApp
+      - target: CompanySystem-iOS
 
-  CoreFramework:
-    templates:
-      - framework
-    sources:
-      - CoreFramework
-    scheme:
-      testTargets:
-        - CoreFrameworkTests
-
-  CoreFrameworkTests:
-    templates:
-      - test
-    sources:
-      - CoreFrameworkTests
+  
