@@ -1,0 +1,2 @@
+#include "CoreFrameworkTests-Base.xcconfig"
+#include "../../Pods/Target Support Files/Pods-CoreFrameworkTests/Pods-CoreFrameworkTests.production.xcconfig"

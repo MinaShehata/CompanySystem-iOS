@@ -1,0 +1,123 @@
+#
+# Highwayfile.yml
+# Copyright © 2022 Netguru S. A. All rights reserved.
+#
+# This `Highwayfile.yml` variant contains the default configuration to be used in
+# an iOS app repository. You can strip the comments in your `Highwayfile.yml`, if
+# you want.
+#
+# Scripts in the following `Highwayfile.yml` file makes use of the following
+# environment variables that should be set up as secret:
+#
+# - `APP_CENTER_API_TOKEN_STAGING`, `APP_CENTER_API_TOKEN_PRODUCTION`: API tokens
+#   used to deploy app to App Center.
+#
+# - `APP_CENTER_APP_NAME_STAGING_ID`, `APP_CENTER_APP_NAME_PRODUCTION_ID`: ID of the application used to deploy app to App Center.
+#
+# - `APP_CENTER_DISTRIBUTION_GROUP`: Name of the distribution group(s) that will be able to download the app.
+#
+# - `SLACK_WEBHOOK_URL`: A generic webhook integration URL used to post
+#   notifications to Slack.
+#
+# - `SLACK_CHANNEL` (optional): A target Slack channel to post notifications to.
+#   If not present, the default channel of the integration is used.
+#
+# Also, those scripts use the following environment variables that are declared
+# publicly in the following file:
+#
+# - `XCODEBUILD_PROJECT`: A path to a project or a workspace Xcode file.
+#
+# - `XCODEBUILD_SCHEME`: A name of the scheme to be built.
+#
+
+# Highway configuration file version.
+version: 1
+
+# Variables available for presets.
+variables:
+    default:
+        XCODEBUILD_SCHEME: NetguruTemplateApp
+        XCODEBUILD_PROJECT: ./NetguruTemplateApp.xcworkspace
+        XCODEBUILD_CONFIGURATION: Debug
+        APPCENTER_ORG_NAME: office-4dmm
+        APPCENTER_DISTRIBUTION_GROUP: $(ENV:APP_CENTER_DISTRIBUTION_GROUP)
+        APPCENTER_RELEASE_NOTES: ""
+    staging:
+        XCODEBUILD_CONFIGURATION: Staging
+        APPCENTER_API_TOKEN: $(ENV:APP_CENTER_API_TOKEN_STAGING)
+        APPCENTER_APP_NAME: $(ENV:APP_CENTER_APP_NAME_STAGING_ID)
+        APPCENTER_RELEASE_NOTES: $(ENV:GIT_CLONE_COMMIT_MESSAGE_BODY)
+    production:
+        XCODEBUILD_CONFIGURATION: Production
+        APPCENTER_API_TOKEN: $(ENV:APP_CENTER_API_TOKEN_PRODUCTION)
+        APPCENTER_APP_NAME: $(ENV:APP_CENTER_APP_NAME_PRODUCTION_ID)
+
+# Bootstrap stage.
+bootstrap:
+    default:
+        - carthage:
+            command: "bootstrap"
+            platforms:
+                - ios
+        - sh:
+            command: "cp .env.sample .env"
+        - sh:
+            command: xcodegen generate
+        - cocoapods:
+            command: "install"
+
+# Test stage.
+test:
+    default:
+        - xcode_test:
+            project: $(XCODEBUILD_PROJECT)
+            scheme: $(XCODEBUILD_SCHEME)
+            code_coverage: true
+            skip_build: true
+            settings:
+                _BUILD_NUMBER: $(ENV:BITRISE_BUILD_NUMBER)
+
+# Deploy stage.
+deploy:
+    staging:
+        - xcode_archive:
+            project: $(XCODEBUILD_PROJECT)
+            scheme: $(XCODEBUILD_SCHEME)
+            method: "enterprise"
+            configuration: $(XCODEBUILD_CONFIGURATION)
+            settings:
+                _BUILD_NUMBER: $(ENV:BITRISE_BUILD_NUMBER)
+        - appcenter:
+            api_token: $(APPCENTER_API_TOKEN)
+            owner_name: $(APPCENTER_ORG_NAME)
+            app_name: $(APPCENTER_APP_NAME)
+            distribution_group: $(APPCENTER_DISTRIBUTION_GROUP)
+            notify: false
+            release_notes: $(APPCENTER_RELEASE_NOTES)
+    production:
+        - xcode_archive:
+            project: $(XCODEBUILD_PROJECT)
+            scheme: $(XCODEBUILD_SCHEME)
+            method: "enterprise"
+            configuration: $(XCODEBUILD_CONFIGURATION)
+            settings:
+                _BUILD_NUMBER: $(ENV:BITRISE_BUILD_NUMBER)
+        - appcenter:
+            api_token: $(APPCENTER_API_TOKEN)
+            owner_name: $(APPCENTER_ORG_NAME)
+            app_name: $(APPCENTER_APP_NAME)
+            distribution_group: $(APPCENTER_DISTRIBUTION_GROUP)
+            notify: false
+            upload_dsym_only: true
+
+# Report stage.
+report:
+  default:
+    - sh:
+        command: "bundle exec danger"
+    - copy_artifacts:
+        path: $(ENV:BITRISE_DEPLOY_DIR)
+    # Uncomment and provide proper values
+    # - slack:
+    #     webhook: $(ENV:SLACK_WEBHOOK_URL)
+    #     channel: $(ENV:SLACK_CHANNEL)

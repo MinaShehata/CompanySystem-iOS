@@ -1,0 +1,2 @@
+#include "NetguruTemplateAppTests-Base.xcconfig"
+#include "../../Pods/Target Support Files/Pods-NetguruTemplateAppTests/Pods-NetguruTemplateAppTests.debug.xcconfig"

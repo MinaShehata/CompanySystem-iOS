@@ -1,0 +1,41 @@
+name: NetguruTemplateApp
+include:
+  - xcodegen_ng_templates.yml
+
+targets:
+  NetguruTemplateApp:
+    templates:
+      - application
+    sources:
+      - App
+    dependencies:
+      - target: CoreFramework
+    scheme:
+      testTargets:
+        - NetguruTemplateAppTests
+    info:
+      properties:
+        UILaunchStoryboardName: LaunchView
+
+  NetguruTemplateAppTests:
+    templates:
+      - test
+    sources:
+      - AppTests
+    dependencies:
+      - target: NetguruTemplateApp
+
+  CoreFramework:
+    templates:
+      - framework
+    sources:
+      - CoreFramework
+    scheme:
+      testTargets:
+        - CoreFrameworkTests
+
+  CoreFrameworkTests:
+    templates:
+      - test
+    sources:
+      - CoreFrameworkTests
